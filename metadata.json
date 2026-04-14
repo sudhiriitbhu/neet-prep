@@ -1,0 +1,5 @@
+{
+  "name": "NEET Prep",
+  "description": "AI-powered flashcard application for NEET exam preparation.",
+  "requestFramePermissions": ["microphone"]
+}

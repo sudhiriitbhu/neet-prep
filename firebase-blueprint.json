@@ -1,0 +1,65 @@
+{
+  "entities": {
+    "Deck": {
+      "title": "Deck",
+      "description": "A collection of flashcards for a specific topic.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "subject": { "type": "string", "enum": ["Biology", "Physics", "Chemistry"] },
+        "topic": { "type": "string" },
+        "createdAt": { "type": "number" },
+        "cards": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "string" },
+              "question": { "type": "string" },
+              "answer": { "type": "string" },
+              "mastered": { "type": "boolean" },
+              "type": { "type": "string", "enum": ["theory", "question"] },
+              "options": { "type": "array", "items": { "type": "string" } },
+              "lastReviewed": { "type": "number" }
+            }
+          }
+        }
+      },
+      "required": ["userId", "title", "cards", "createdAt"]
+    },
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User specific settings and metadata.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "dashboardTitle": { "type": "string" },
+        "dashboardDescription": { "type": "string" }
+      },
+      "required": ["uid", "email"]
+    }
+  },
+  "firestore": {
+    "/decks/{deckId}": {
+      "schema": "Deck",
+      "description": "Collection of study decks."
+    },
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User profiles and settings."
+    },
+    "/theory/{cardId}": {
+      "schema": "object",
+      "description": "Individual theory cards for global search and categorization."
+    },
+    "/questions/{cardId}": {
+      "schema": "object",
+      "description": "Individual practice questions for global search and categorization."
+    }
+  }
+}
